@@ -2,8 +2,8 @@ package main
 import "testing"
 
 func TestCompare500mgWith10g(t *testing.T) {
-	mass1 := NewMass(500, "MG")
-	mass2 := NewMass(10, "G")
+	mass1 := NewMass(500, MG)
+	mass2 := NewMass(10, G)
 	result := mass1.Compare(&mass2)
 	expected := false
 	if result != expected {
@@ -12,8 +12,8 @@ func TestCompare500mgWith10g(t *testing.T) {
 }
 
 func TestCompare1000gWith1kg(t *testing.T) {
-	mass1 := NewMass(1000, "G")
-	mass2 := NewMass(1, "KG")
+	mass1 := NewMass(1000, G)
+	mass2 := NewMass(1, KG)
 	result := mass1.Compare(&mass2)
 	expected := true
 	if result != expected {
@@ -22,22 +22,23 @@ func TestCompare1000gWith1kg(t *testing.T) {
 }
 
 func TestAdd1kgAnd2000g(t *testing.T) {
-	mass1 := NewMass(1, "KG")
-	mass2 := NewMass(2000, "G")
+	mass1 := NewMass(1, KG)
+	mass2 := NewMass(2000, G)
 	result := mass1.Add(&mass2)
-	var expected float64 = 3000
+	expected := NewMass(3000, G)
+	
 	if result != expected {
-		t.Errorf("Expected %f but returned %f", expected, result)
+		t.Errorf("Incorrect addition or unit")
 	}
 }
 
 func TestSubtract1gWith200mg(t *testing.T) {
-	mass1 := NewMass(1, "G")
-	mass2 := NewMass(200, "MG")
+	mass1 := NewMass(1, G)
+	mass2 := NewMass(200, MG)
 	result := mass1.Subtract(&mass2)
-	var expected float64 = 800
+	expected := NewMass(800, MG)
 	if result != expected {
-		t.Errorf("Expected %f but returned %f", expected, result)
+		t.Errorf("Incorrect subtraction or unit")
 	}
 }
 
