@@ -1,5 +1,4 @@
 package main
-
 type LengthUnit float64
 
 const (
@@ -22,16 +21,16 @@ func NewLength(val float64, unit LengthUnit) Length {
 	}
 }
 
-func (l *Length) convertTo(other *Length) float64{
+func (l Length) convertTo(other Length) float64{
 	return l.value * float64(l.unit) / float64(other.unit)
 }
 
-func (l *Length) Compare(other *Length) bool {
+func (l Length) Compare(other Length) bool {
 	len1 := l.convertTo(other)
 	len2 := other.value
 	return len1 == len2
 }
-func (l *Length) Add(other *Length) Length {
+func (l Length) Add(other Length) Length {
 	len1 := l.convertTo(other)
 	len2 := other.value;
 	return Length {
@@ -40,7 +39,7 @@ func (l *Length) Add(other *Length) Length {
 	}
 }
 
-func (l *Length) Subtract(other *Length) Length {
+func (l Length) Subtract(other Length) Length {
 	len1 := l.convertTo(other)
 	len2 := other.value;
 	return Length {
