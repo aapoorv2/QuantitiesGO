@@ -20,17 +20,17 @@ func NewVolume(val float64, unit VolumeUnit) Volume {
 	}
 }
 
-func (v Volume) convertTo(other Volume) float64{
-	return v.value * float64(v.unit) / float64(other.unit)
+func (v Volume) convertTo(other VolumeUnit) float64{
+	return v.value * float64(v.unit) / float64(other)
 }
 
 func (v Volume) Compare(other Volume) bool {
-	vol1 := v.convertTo(other)
+	vol1 := v.convertTo(other.unit)
 	vol2 := other.value
 	return vol1 == vol2
 }
 func (v Volume) Add(other Volume) Volume {
-	vol1 := v.convertTo(other)
+	vol1 := v.convertTo(other.unit)
 	vol2 := other.value;
 	return Volume {
 		value: vol1 + vol2,
@@ -39,7 +39,7 @@ func (v Volume) Add(other Volume) Volume {
 }
 
 func (v Volume) Subtract(other Volume) Volume {
-	vol1 := v.convertTo(other)
+	vol1 := v.convertTo(other.unit)
 	vol2 := other.value;
 	return Volume {
 		value: vol1 - vol2,

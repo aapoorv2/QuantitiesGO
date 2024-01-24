@@ -21,17 +21,17 @@ func NewLength(val float64, unit LengthUnit) Length {
 	}
 }
 
-func (l Length) convertTo(other Length) float64{
-	return l.value * float64(l.unit) / float64(other.unit)
+func (l Length) convertTo(other LengthUnit) float64{
+	return l.value * float64(l.unit) / float64(other)
 }
 
 func (l Length) Compare(other Length) bool {
-	len1 := l.convertTo(other)
+	len1 := l.convertTo(other.unit)
 	len2 := other.value
 	return len1 == len2
 }
 func (l Length) Add(other Length) Length {
-	len1 := l.convertTo(other)
+	len1 := l.convertTo(other.unit)
 	len2 := other.value;
 	return Length {
 		value: len1 + len2,
@@ -40,7 +40,7 @@ func (l Length) Add(other Length) Length {
 }
 
 func (l Length) Subtract(other Length) Length {
-	len1 := l.convertTo(other)
+	len1 := l.convertTo(other.unit)
 	len2 := other.value;
 	return Length {
 		value: len1 - len2,
